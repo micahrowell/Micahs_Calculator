@@ -48,34 +48,34 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isNum(String s){
         switch(s){
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                    return true;
-                default:
-                    return false;
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+                return true;
+            default:
+                return false;
         }
     }
 
     private int precedence(String s){
         switch(s){
-                case "^":
-                    return 3;
-                case "*":
-                case "/":
-                    return 2;
-                case "+":
-                case "-":
-                    return 1;
-                default:
-                    return 0;
+            case "^":
+                return 3;
+            case "*":
+            case "/":
+                return 2;
+            case "+":
+            case "-":
+                return 1;
+            default:
+                return 0;
         }
     }
 
