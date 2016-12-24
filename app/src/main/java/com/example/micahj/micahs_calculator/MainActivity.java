@@ -36,16 +36,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView results;
 
     private class Calc {
-        public String viewInput;            // Displays the input to the user
-        public String viewResults;          // Displays the math results to the user
+        private String viewInput;            // Displays the input to the user
+        private String viewResults;          // Displays the math results to the user
 
-        public boolean lastWasOperator;     // This is a flag to determine if the last input was an
+        private boolean lastWasOperator;     // This is a flag to determine if the last input was an
         // operator, used for the equals button
 
-        public ArrayList<String> input;     // All numbers and operators are appended to this array
-        public ArrayList<String> output;    // All numbers are stored here in shuntYardAlg()
-        public Stack<String> operStack;     // All operators are stored here in shuntYardAlg()
-        public Stack<Double> nums;
+        private ArrayList<String> input;     // All numbers and operators are appended to this array
+        private ArrayList<String> output;    // All numbers are stored here in shuntYardAlg()
+        private Stack<String> operStack;     // All operators are stored here in shuntYardAlg()
+        private Stack<Double> nums;
 
         private boolean isNum(String s){
             switch(s){
