@@ -11,29 +11,28 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton one;
-    private ImageButton two;
-    private ImageButton three;
-    private ImageButton four;
-    private ImageButton five;
-    private ImageButton six;
-    private ImageButton seven;
-    private ImageButton eight;
-    private ImageButton nine;
-    private ImageButton zero;
-    private ImageButton point;
-    private ImageButton clear;
-    private ImageButton plus;
-    private ImageButton minus;
-    private ImageButton multiply;
-    private ImageButton divide;
-    private ImageButton power;      // Don't forget to implement!!
-    private ImageButton back;
-    private ImageButton equals;
-    // The input TextView will display what the user has input
-    private TextView textInput;
-    // The results TextView is the result of all the maths
-    private TextView results;
+    private ImageButton one,
+                        two,
+                        three,
+                        four,
+                        five,
+                        six,
+                        seven,
+                        eight,
+                        nine,
+                        zero,
+                        point,
+                        clear,
+                        plus,
+                        minus,
+                        multiply,
+                        divide,
+                        power,      // Don't forget to implement!!
+                        back,
+                        equals;
+
+    private TextView textInput,     // The input TextView will display what the user has input
+                     results;       // The results TextView is the result of all the maths
 
     private String viewInput,           // Displays the input to the user
                    viewResults;         // Displays the math results to the user
@@ -43,21 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> input,     // All numbers and operators are appended to this array
                               output;    // All numbers are stored here in shuntYardAlg()
+
     private Stack<String> operStack;     // All operators are stored here in shuntYardAlg()
     private Stack<Double> nums;
 
-    private boolean isNum(String s){
+    private boolean isOper(String s){
         switch(s){
-            case "0":
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-            case "5":
-            case "6":
-            case "7":
-            case "8":
-            case "9":
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+            case "^":
                 return true;
             default:
                 return false;
@@ -80,16 +75,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String associative(String s){
-        if (s.equals("^")) return "right";
+        if(s.equals("^")) return "right";
+
         return "left";
     }
 
+    // Here I take the user's input and turn it into Reverse Polish Notation
     private void shuntYardAlg(){
         for(int i = 0; i < input.size(); i++){
             String in = input.get(i);
-            if(isNum(in)){
-                output.add(in);
-            } else {
+            if(isOper(in)){
                 while(!operStack.isEmpty()){
                     if(associative(in).equals("left") && precedence(in) <= precedence(operStack.peek())){
                         output.add(operStack.pop());
@@ -99,7 +94,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 operStack.push(in);
+            } else {
+                output.add(in);
             }
+
             if(i == input.size() - 1){
                 while(!operStack.isEmpty())
                     output.add(operStack.pop());
@@ -107,13 +105,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // This function evaluates the input after it has been put into Reverse Polish Notation
     private void RPN(){
         shuntYardAlg();
         for(int i = 0; i < output.size(); i++){
             String s = output.get(i);
-            if(isNum(s))
-                nums.push(Double.parseDouble(s));
-            else{
+            if(isOper(s)){
                 Double  d1 = nums.pop(),
                         d2 = nums.pop();
 
@@ -126,7 +123,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "/": nums.push(d2 / d1);
                         break;
+                    case "^":   // To be implemented at a later date
+                        break;
                 }
+            } else {
+                nums.push(Double.parseDouble(s));
             }
         }
     }
@@ -293,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // power.setOnClickListener(v) // oper_button("^");
+        // power.setOnClickListener()      oper_button("^");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -326,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // The equals button calls the functions in the Math class that do all the math
+        // The equals button does the thing
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
