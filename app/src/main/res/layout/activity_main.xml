@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/calc_app_design">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/result"
+        android:id="@+id/results"
+        android:textColor="#9c9c9c"
+        android:textSize="70sp"
+        android:typeface="sans"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/nums"
+        android:id="@+id/input_value"
+        android:textColor="#9c9c9c"
+        android:textSize="35sp"
+        android:typeface="sans"
+        android:layout_above="@+id/button_7"
+        android:layout_toEndOf="@+id/results" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_1"
+        android:background="@drawable/one"
+        android:layout_marginBottom="137dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_2"
+        android:layout_alignTop="@+id/button_1"
+        android:layout_toEndOf="@+id/button_1"
+        android:background="@drawable/two"/>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_3"
+        android:layout_alignTop="@+id/button_2"
+        android:layout_toEndOf="@+id/button_2"
+        android:background="@drawable/three"/>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/minus_button"
+        android:layout_alignTop="@+id/button_3"
+        android:layout_toEndOf="@+id/button_3"
+        android:background="@drawable/minus"/>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:id="@+id/point"
+        android:layout_below="@+id/button_2"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/point"
+        android:layout_alignBottom="@+id/button_0" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_0"
+        android:layout_below="@+id/button_2"
+        android:layout_toEndOf="@+id/button_1"
+        android:background="@drawable/zero"
+        android:layout_above="@+id/equals" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/clear_button"
+        android:background="@drawable/clear"
+        android:layout_above="@+id/equals"
+        android:layout_toStartOf="@+id/plus_button"
+        android:layout_below="@+id/button_2" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/plus_button"
+        android:background="@drawable/plus"
+        android:layout_above="@+id/equals"
+        android:layout_toEndOf="@+id/button_6"
+        android:layout_below="@+id/button_3" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:id="@+id/equals"
+        android:background="@drawable/equals"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="85dp"
+        android:id="@+id/button_4"
+        android:layout_above="@+id/button_1"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/four"/>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="85dp"
+        android:id="@+id/button_5"
+        android:layout_above="@+id/button_2"
+        android:layout_toEndOf="@+id/button_4"
+        android:background="@drawable/five"/>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="85dp"
+        android:id="@+id/button_6"
+        android:background="@drawable/six"
+        android:layout_alignTop="@+id/button_5"
+        android:layout_toEndOf="@+id/button_2" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="85dp"
+        android:id="@+id/mult_button"
+        android:background="@drawable/mult"
+        android:layout_above="@+id/button_3"
+        android:layout_alignEnd="@+id/minus_button"
+        android:layout_toEndOf="@+id/button_3" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_7"
+        android:background="@drawable/seven"
+        android:layout_above="@+id/button_4"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_8"
+        android:layout_alignBottom="@+id/button_7"
+        android:layout_toEndOf="@+id/button_7"
+        android:background="@drawable/eight"/>
+
+    <ImageButton
+        android:layout_width="95dp"
+        android:layout_height="70dp"
+        android:id="@+id/button_9"
+        android:layout_above="@+id/button_5"
+        android:background="@drawable/nine"
+        android:layout_toEndOf="@+id/button_5" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:id="@+id/divide_button"
+        android:background="@drawable/divide"
+        android:layout_below="@+id/back_button"
+        android:layout_alignEnd="@+id/minus_button"
+        android:layout_toEndOf="@+id/button_6" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:id="@+id/back_button"
+        android:background="@drawable/back_button"
+        android:layout_above="@+id/button_9"
+        android:layout_alignEnd="@+id/divide_button" />
+
+
+</RelativeLayout>
