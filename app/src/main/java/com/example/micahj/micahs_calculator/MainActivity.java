@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        public void RPN(){
+        private void RPN(){
             shuntYardAlg();
             for(int i = 0; i < output.size(); i++){
                 String s = output.get(i);
