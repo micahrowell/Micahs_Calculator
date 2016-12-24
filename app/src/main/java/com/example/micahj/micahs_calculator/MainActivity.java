@@ -31,24 +31,23 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton back;
     private ImageButton equals;
     // The input TextView will display what the user has input
-    private TextView input;
+    private TextView textInput;
     // The results TextView is the result of all the maths
     private TextView results;
 
-    private class Calc {
-        public String viewInput;            // Displays the input to the user
-        public String viewResults;          // Displays the math results to the user
+    private String viewInput,           // Displays the input to the user
+                   viewResults;         // Displays the math results to the user
 
-        public boolean lastWasOperator;     // This is a flag to determine if the last input was an
-        // operator, used for the equals button
+    private boolean lastWasOperator;    // This is a flag to determine if the last input was an
+                                        // operator, used for the equals button
 
-        public ArrayList<String> input;     // All numbers and operators are appended to this array
-        public ArrayList<String> output;    // All numbers are stored here in shuntYardAlg()
-        public Stack<String> operStack;     // All operators are stored here in shuntYardAlg()
-        public Stack<Double> nums;
+    private ArrayList<String> input,     // All numbers and operators are appended to this array
+                              output;    // All numbers are stored here in shuntYardAlg()
+    private Stack<String> operStack;     // All operators are stored here in shuntYardAlg()
+    private Stack<Double> nums;
 
-        private boolean isNum(String s){
-            switch(s){
+    private boolean isNum(String s){
+        switch(s){
                 case "0":
                 case "1":
                 case "2":
@@ -62,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 default:
                     return false;
-            }
         }
+    }
 
-        private int precedence(String s){
-            switch(s){
+    private int precedence(String s){
+        switch(s){
                 case "^":
                     return 3;
                 case "*":
@@ -77,63 +76,80 @@ public class MainActivity extends AppCompatActivity {
                     return 1;
                 default:
                     return 0;
-            }
         }
+    }
 
-        private String associative(String s){
-            if (s.equals("^")) return "right";
-            return "left";
-        }
+    private String associative(String s){
+        if (s.equals("^")) return "right";
+        return "left";
+    }
 
-        private void shuntYardAlg(){
-            for(int i = 0; i < input.size(); i++){
-                String in = input.get(i);
-                if(isNum(in)){
-                    output.add(in);
-                } else {
-                    while(!operStack.isEmpty()){
-                        if(associative(in).equals("left") && precedence(in) <= precedence(operStack.peek())){
-                            output.add(operStack.pop());
-                        }
-                        if(associative(in).equals("right") && precedence(in) < precedence(operStack.peek())){
-                            output.add(operStack.pop());
-                        }
-                    }
-                    operStack.push(in);
-                }
-                if(i == input.size() - 1){
-                    while(!operStack.isEmpty())
+    private void shuntYardAlg(){
+        for(int i = 0; i < input.size(); i++){
+            String in = input.get(i);
+            if(isNum(in)){
+                output.add(in);
+            } else {
+                while(!operStack.isEmpty()){
+                    if(associative(in).equals("left") && precedence(in) <= precedence(operStack.peek())){
                         output.add(operStack.pop());
+                    }
+                    if(associative(in).equals("right") && precedence(in) < precedence(operStack.peek())){
+                        output.add(operStack.pop());
+                    }
                 }
+                operStack.push(in);
+            }
+            if(i == input.size() - 1){
+                while(!operStack.isEmpty())
+                    output.add(operStack.pop());
             }
         }
+    }
 
-        public void RPN(){
-            shuntYardAlg();
-            for(int i = 0; i < output.size(); i++){
-                String s = output.get(i);
-                if(isNum(s))
-                    nums.push(Double.parseDouble(s));
-                else{
-                    Double  d1 = nums.pop(),
-                            d2 = nums.pop();
+    private void RPN(){
+        shuntYardAlg();
+        for(int i = 0; i < output.size(); i++){
+            String s = output.get(i);
+            if(isNum(s))
+                nums.push(Double.parseDouble(s));
+            else{
+                Double  d1 = nums.pop(),
+                        d2 = nums.pop();
 
-                    switch (s){
-                        case "+": nums.push(d1 + d2);
-                            break;
-                        case "-": nums.push(d2 - d1);
-                            break;
-                        case "*": nums.push(d2 * d1);
-                            break;
-                        case "/": nums.push(d2 / d1);
-                            break;
-                    }
+                switch (s){
+                    case "+": nums.push(d1 + d2);
+                        break;
+                    case "-": nums.push(d2 - d1);
+                        break;
+                    case "*": nums.push(d2 * d1);
+                        break;
+                    case "/": nums.push(d2 / d1);
+                        break;
                 }
             }
         }
     }
 
-    Calc math = new Calc();
+    private void num_button(String s){
+        input.add(s);
+        viewInput = viewInput.concat(s);
+        textInput.setText(viewInput);
+        lastWasOperator = false;
+    }
+
+    private void oper_button(String s){
+        if(lastWasOperator){
+            Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_LONG).show();
+        } else {
+            input.add(s);
+            viewInput = viewInput.concat(" ").concat(s).concat(" ");
+            lastWasOperator = true;
+        }
+        textInput.setText(viewInput);
+    }
+
+    //Calc math = new Calc();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,17 +175,17 @@ public class MainActivity extends AppCompatActivity {
         // power = (ImageButton) findViewbyID(R.id.power_button);
         back = (ImageButton) findViewById(R.id.back_button);
         equals = (ImageButton) findViewById(R.id.equals);
-        input = (TextView) findViewById(R.id.input_value);
+        textInput = (TextView) findViewById(R.id.input_value);
         results = (TextView) findViewById(R.id.results);
 
 
-        math.viewInput = "";
-        math.viewResults = "";
-        math.lastWasOperator = false;
-        math.input = new ArrayList<>();
-        math.output = new ArrayList<>();
-        math.operStack = new Stack<>();
-        math.nums = new Stack<>();
+        viewInput = "";
+        viewResults = "";
+        lastWasOperator = false;
+        input = new ArrayList<>();
+        output = new ArrayList<>();
+        operStack = new Stack<>();
+        nums = new Stack<>();
 
 
         one.setOnClickListener(new View.OnClickListener() {
@@ -282,16 +298,16 @@ public class MainActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(math.viewInput.isEmpty()){
+                if(viewInput.isEmpty()){
                     Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(math.viewInput.substring(math.viewInput.length() - 1).equals(" ")){
-                        math.viewInput = math.viewInput.substring(0, math.viewInput.length() - 3);
+                    if(viewInput.substring(viewInput.length() - 1).equals(" ")){
+                        viewInput = viewInput.substring(0, viewInput.length() - 3);
                     } else {
-                        math.viewInput = math.viewInput.substring(0, math.viewInput.length() - 1);
+                        viewInput = viewInput.substring(0, viewInput.length() - 1);
                     }
-                    math.input.remove(math.input.size() - 1);
-                    input.setText(math.viewInput);
+                    input.remove(input.size() - 1);
+                    textInput.setText(viewInput);
                 }
             }
         });
@@ -300,12 +316,12 @@ public class MainActivity extends AppCompatActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                math.input.clear();
-                math.output.clear();
-                math.operStack.clear();
-                math.viewInput = "";
-                math.viewResults = "";
-                input.setText("");
+                input.clear();
+                output.clear();
+                operStack.clear();
+                viewInput = "";
+                viewResults = "";
+                textInput.setText("");
                 results.setText("");
             }
         });
@@ -314,31 +330,13 @@ public class MainActivity extends AppCompatActivity {
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(math.lastWasOperator){
+                if(lastWasOperator){
                     Toast.makeText(MainActivity.this, "Enter a number after the operator", Toast.LENGTH_LONG).show();
                 } else {
-                    math.RPN();
-                    results.setText(Double.toString(math.nums.peek()));
+                    RPN();
+                    results.setText(Double.toString(nums.peek()));
                 }
             }
         });
-    }
-
-    private void num_button(String s){
-        math.input.add(s);
-        math.viewInput = math.viewInput.concat(s);
-        input.setText(math.viewInput);
-        math.lastWasOperator = false;
-    }
-
-    private void oper_button(String s){
-        if(math.lastWasOperator){
-            Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_LONG).show();
-        } else {
-            math.input.add(s);
-            math.viewInput = math.viewInput.concat(" ").concat(s).concat(" ");
-            math.lastWasOperator = true;
-        }
-        input.setText(math.viewInput);
     }
 }
