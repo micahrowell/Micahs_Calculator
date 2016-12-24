@@ -1,4 +1,4 @@
-# calculator
+# Micah's Calculator
 A little Android app where I use the Shunting Yard Algorithm along with Reverse Polish Notation to calculate all the things. 
 
 Known bugs:
