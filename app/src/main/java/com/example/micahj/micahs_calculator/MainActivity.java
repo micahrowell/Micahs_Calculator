@@ -334,7 +334,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Enter a number after the operator", Toast.LENGTH_LONG).show();
                 } else {
                     RPN();
-                    results.setText(Double.toString(nums.peek()));
+                    viewResults = Double.toString(nums.peek());
+                    results.setText(viewResults);
                 }
             }
         });
