@@ -89,9 +89,11 @@ public class MainActivity extends AppCompatActivity {
                     if(associative(in).equals("left") && precedence(in) <= precedence(operStack.peek())){
                         output.add(operStack.pop());
                     }
-                    if(associative(in).equals("right") && precedence(in) < precedence(operStack.peek())){
+                    else if(associative(in).equals("right") && precedence(in) < precedence(operStack.peek())){
                         output.add(operStack.pop());
                     }
+                    else
+                        break;
                 }
                 operStack.push(in);
             } else {
