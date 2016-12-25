@@ -319,10 +319,13 @@ public class MainActivity extends Activity {
                 } else {
                     if(userInput.substring(viewInput.length() - 1).equals(" ")){
                         userInput = userInput.substring(0, viewInput.length() - 3);
+                    } else if(isOper(userInput.substring(viewInput.length() - 1))){
+                        userInput = userInput.substring(0, viewInput.length() - 1);
+                        input.remove(input.size()-1);
                     } else {
                         userInput = userInput.substring(0, viewInput.length() - 1);
                     }
-                    input.remove(input.size() - 1);
+                    //input.remove(input.size() - 1);
                     viewInput.setText(userInput);
                 }
             }
@@ -336,6 +339,7 @@ public class MainActivity extends Activity {
                 output.clear();
                 operStack.clear();
                 userInput = "";
+                numInput = "";
                 viewResults = "";
                 viewInput.setText("");
                 results.setText("");
@@ -348,6 +352,8 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 if(lastWasOperator){
                     Toast.makeText(MainActivity.this, "Enter a number after the operator", Toast.LENGTH_LONG).show();
+                } else if(userInput.isEmpty()){
+                    // intentionally left blank
                 } else {
                     input.add(numInput);
                     numInput = "";
