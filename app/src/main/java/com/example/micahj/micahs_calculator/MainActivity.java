@@ -1,7 +1,6 @@
 package com.example.micahj.micahs_calculator;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
