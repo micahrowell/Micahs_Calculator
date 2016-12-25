@@ -1,5 +1,7 @@
 # Micah's Calculator
-A little Android app where I use the Shunting Yard Algorithm along with Reverse Polish Notation to calculate all the things. 
+A little Android app where I use the Shunting Yard Algorithm along with Reverse Polish Notation to calculate all the things.
+
+The apk is located under app/build/outputs/apk.
 
 Known bugs:
 - Back button working improperly
