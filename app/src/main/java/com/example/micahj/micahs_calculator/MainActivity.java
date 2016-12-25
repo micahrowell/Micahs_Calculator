@@ -39,7 +39,8 @@ public class MainActivity extends Activity {
     private TextView viewInput,     // The input TextView will display what the user has input
                      results;       // The results TextView is the result of all the maths
 
-    private String numInput,           // Displays the input to the user
+    private String numInput,            // Stores the number user is currently inputting
+                   userInput,           // Stores the total input from the user
                    viewResults;         // Displays the math results to the user
 
     private boolean lastWasOperator;    // This is a flag to determine if the last input was an
@@ -140,9 +141,9 @@ public class MainActivity extends Activity {
     }
 
     private void num_button(String s){
-        input.add(s);
         numInput = numInput.concat(s);
-        viewInput.setText(numInput);
+        userInput = userInput.concat(s);
+        viewInput.setText(userInput);
         lastWasOperator = false;
     }
 
@@ -150,11 +151,13 @@ public class MainActivity extends Activity {
         if(lastWasOperator){
             Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_LONG).show();
         } else {
+            input.add(numInput);
+            numInput = "";
             input.add(s);
-            numInput = numInput.concat(" ").concat(s).concat(" ");
+            userInput = userInput.concat(" ").concat(s).concat(" ");
             lastWasOperator = true;
         }
-        viewInput.setText(numInput);
+        viewInput.setText(userInput);
     }
 
     @Override
@@ -185,6 +188,7 @@ public class MainActivity extends Activity {
         results = (TextView) findViewById(R.id.results);
 
 
+        userInput = "";
         numInput = "";
         viewResults = "";
         lastWasOperator = false;
@@ -310,16 +314,16 @@ public class MainActivity extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numInput.isEmpty()){
+                if(userInput.isEmpty()){
                     Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(numInput.substring(viewInput.length() - 1).equals(" ")){
-                        numInput = numInput.substring(0, viewInput.length() - 3);
+                    if(userInput.substring(viewInput.length() - 1).equals(" ")){
+                        userInput = userInput.substring(0, viewInput.length() - 3);
                     } else {
-                        numInput = numInput.substring(0, viewInput.length() - 1);
+                        userInput = userInput.substring(0, viewInput.length() - 1);
                     }
                     input.remove(input.size() - 1);
-                    viewInput.setText(numInput);
+                    viewInput.setText(userInput);
                 }
             }
         });
@@ -331,7 +335,7 @@ public class MainActivity extends Activity {
                 input.clear();
                 output.clear();
                 operStack.clear();
-                numInput = "";
+                userInput = "";
                 viewResults = "";
                 viewInput.setText("");
                 results.setText("");
@@ -345,6 +349,8 @@ public class MainActivity extends Activity {
                 if(lastWasOperator){
                     Toast.makeText(MainActivity.this, "Enter a number after the operator", Toast.LENGTH_LONG).show();
                 } else {
+                    input.add(numInput);
+                    numInput = "";
                     RPN();
                     viewResults = Double.toString(nums.peek());
                     results.setText(viewResults);
