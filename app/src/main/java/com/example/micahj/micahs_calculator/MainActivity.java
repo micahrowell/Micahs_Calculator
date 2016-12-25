@@ -1,6 +1,7 @@
 package com.example.micahj.micahs_calculator;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +29,7 @@ public class MainActivity extends Activity {
                         minus,
                         multiply,
                         divide,
-                        power,      // Don't forget to implement!!
+                      //  power,       Don't forget to implement!!
                         back,
                         equals;
 
@@ -190,6 +191,12 @@ public class MainActivity extends Activity {
         output = new ArrayList<>();
         operStack = new Stack<>();
         nums = new Stack<>();
+
+
+        Typeface digital_font = Typeface.createFromAsset(getAssets(), "fonts/DS-DIGI.TTF");
+
+        textInput.setTypeface(digital_font);
+        results.setTypeface(digital_font);
 
 
         one.setOnClickListener(new View.OnClickListener() {
