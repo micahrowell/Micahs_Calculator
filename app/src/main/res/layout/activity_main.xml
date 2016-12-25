@@ -5,7 +5,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="@drawable/calc_app_design">
+    android:background="@drawable/background">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,7 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/result"
         android:id="@+id/results"
-        android:textColor="#9c9c9c"
+        android:textColor="#000000"
         android:textSize="70sp"
         android:typeface="sans"
         android:layout_alignParentTop="true"
@@ -25,17 +25,17 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/nums"
         android:id="@+id/input_value"
-        android:textColor="#9c9c9c"
+        android:textColor="#000000"
         android:textSize="35sp"
         android:typeface="sans"
-        android:layout_above="@+id/button_7"
+        android:layout_below="@+id/results"
         android:layout_toEndOf="@+id/results" />
 
     <ImageButton
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:id="@+id/button_1"
-        android:background="@drawable/one"
+        android:background="@drawable/button"
         android:layout_marginBottom="137dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
@@ -46,7 +46,7 @@
         android:id="@+id/button_2"
         android:layout_alignTop="@+id/button_1"
         android:layout_toEndOf="@+id/button_1"
-        android:background="@drawable/two"/>
+        android:background="@drawable/button"/>
 
     <ImageButton
         android:layout_width="100dp"
@@ -54,7 +54,7 @@
         android:id="@+id/button_3"
         android:layout_alignTop="@+id/button_2"
         android:layout_toEndOf="@+id/button_2"
-        android:background="@drawable/three"/>
+        android:background="@drawable/button"/>
 
     <ImageButton
         android:layout_width="100dp"
@@ -62,7 +62,7 @@
         android:id="@+id/minus_button"
         android:layout_alignTop="@+id/button_3"
         android:layout_toEndOf="@+id/button_3"
-        android:background="@drawable/minus"/>
+        android:background="@drawable/button"/>
 
     <ImageButton
         android:layout_width="80dp"
@@ -70,7 +70,7 @@
         android:id="@+id/point"
         android:layout_below="@+id/button_2"
         android:layout_alignParentStart="true"
-        android:background="@drawable/point"
+        android:background="@drawable/button"
         android:layout_alignBottom="@+id/button_0" />
 
     <ImageButton
@@ -79,14 +79,14 @@
         android:id="@+id/button_0"
         android:layout_below="@+id/button_2"
         android:layout_toEndOf="@+id/button_1"
-        android:background="@drawable/zero"
+        android:background="@drawable/button"
         android:layout_above="@+id/equals" />
 
     <ImageButton
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:id="@+id/clear_button"
-        android:background="@drawable/clear"
+        android:background="@drawable/button"
         android:layout_above="@+id/equals"
         android:layout_toStartOf="@+id/plus_button"
         android:layout_below="@+id/button_2" />
@@ -95,7 +95,7 @@
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:id="@+id/plus_button"
-        android:background="@drawable/plus"
+        android:background="@drawable/button"
         android:layout_above="@+id/equals"
         android:layout_toEndOf="@+id/button_6"
         android:layout_below="@+id/button_3" />
@@ -104,7 +104,7 @@
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:id="@+id/equals"
-        android:background="@drawable/equals"
+        android:background="@drawable/button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -114,7 +114,7 @@
         android:id="@+id/button_4"
         android:layout_above="@+id/button_1"
         android:layout_alignParentStart="true"
-        android:background="@drawable/four"/>
+        android:background="@drawable/button"/>
 
     <ImageButton
         android:layout_width="100dp"
@@ -122,13 +122,13 @@
         android:id="@+id/button_5"
         android:layout_above="@+id/button_2"
         android:layout_toEndOf="@+id/button_4"
-        android:background="@drawable/five"/>
+        android:background="@drawable/button"/>
 
     <ImageButton
         android:layout_width="100dp"
         android:layout_height="85dp"
         android:id="@+id/button_6"
-        android:background="@drawable/six"
+        android:background="@drawable/button"
         android:layout_alignTop="@+id/button_5"
         android:layout_toEndOf="@+id/button_2" />
 
@@ -136,7 +136,7 @@
         android:layout_width="80dp"
         android:layout_height="85dp"
         android:id="@+id/mult_button"
-        android:background="@drawable/mult"
+        android:background="@drawable/button"
         android:layout_above="@+id/button_3"
         android:layout_alignEnd="@+id/minus_button"
         android:layout_toEndOf="@+id/button_3" />
@@ -145,7 +145,7 @@
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:id="@+id/button_7"
-        android:background="@drawable/seven"
+        android:background="@drawable/button"
         android:layout_above="@+id/button_4"
         android:layout_alignParentStart="true" />
 
@@ -155,21 +155,21 @@
         android:id="@+id/button_8"
         android:layout_alignBottom="@+id/button_7"
         android:layout_toEndOf="@+id/button_7"
-        android:background="@drawable/eight"/>
+        android:background="@drawable/button"/>
 
     <ImageButton
         android:layout_width="95dp"
         android:layout_height="70dp"
         android:id="@+id/button_9"
         android:layout_above="@+id/button_5"
-        android:background="@drawable/nine"
+        android:background="@drawable/button"
         android:layout_toEndOf="@+id/button_5" />
 
     <ImageButton
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:id="@+id/divide_button"
-        android:background="@drawable/divide"
+        android:background="@drawable/button"
         android:layout_below="@+id/back_button"
         android:layout_alignEnd="@+id/minus_button"
         android:layout_toEndOf="@+id/button_6" />
@@ -178,7 +178,7 @@
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:id="@+id/back_button"
-        android:background="@drawable/back_button"
+        android:background="@drawable/button"
         android:layout_above="@+id/button_9"
         android:layout_alignEnd="@+id/divide_button" />
 
