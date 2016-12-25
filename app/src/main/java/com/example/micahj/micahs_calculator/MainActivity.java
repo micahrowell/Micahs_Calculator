@@ -2,8 +2,11 @@ package com.example.micahj.micahs_calculator;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -33,10 +36,10 @@ public class MainActivity extends Activity {
                         back,
                         equals;
 
-    private TextView textInput,     // The input TextView will display what the user has input
+    private TextView viewInput,     // The input TextView will display what the user has input
                      results;       // The results TextView is the result of all the maths
 
-    private String viewInput,           // Displays the input to the user
+    private String numInput,           // Displays the input to the user
                    viewResults;         // Displays the math results to the user
 
     private boolean lastWasOperator;    // This is a flag to determine if the last input was an
@@ -138,8 +141,8 @@ public class MainActivity extends Activity {
 
     private void num_button(String s){
         input.add(s);
-        viewInput = viewInput.concat(s);
-        textInput.setText(viewInput);
+        numInput = numInput.concat(s);
+        viewInput.setText(numInput);
         lastWasOperator = false;
     }
 
@@ -148,13 +151,11 @@ public class MainActivity extends Activity {
             Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_LONG).show();
         } else {
             input.add(s);
-            viewInput = viewInput.concat(" ").concat(s).concat(" ");
+            numInput = numInput.concat(" ").concat(s).concat(" ");
             lastWasOperator = true;
         }
-        textInput.setText(viewInput);
+        viewInput.setText(numInput);
     }
-
-    //Calc math = new Calc();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,11 +181,11 @@ public class MainActivity extends Activity {
         // power = (ImageButton) findViewbyID(R.id.power_button);
         back = (ImageButton) findViewById(R.id.back_button);
         equals = (ImageButton) findViewById(R.id.equals);
-        textInput = (TextView) findViewById(R.id.input_value);
+        viewInput = (TextView) findViewById(R.id.input_value);
         results = (TextView) findViewById(R.id.results);
 
 
-        viewInput = "";
+        numInput = "";
         viewResults = "";
         lastWasOperator = false;
         input = new ArrayList<>();
@@ -195,7 +196,7 @@ public class MainActivity extends Activity {
 
         Typeface digital_font = Typeface.createFromAsset(getAssets(), "fonts/DS-DIGI.TTF");
 
-        textInput.setTypeface(digital_font);
+        viewInput.setTypeface(digital_font);
         results.setTypeface(digital_font);
 
 
@@ -309,16 +310,16 @@ public class MainActivity extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(viewInput.isEmpty()){
+                if(numInput.isEmpty()){
                     Toast.makeText(MainActivity.this, "Invalid Operation!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(viewInput.substring(viewInput.length() - 1).equals(" ")){
-                        viewInput = viewInput.substring(0, viewInput.length() - 3);
+                    if(numInput.substring(viewInput.length() - 1).equals(" ")){
+                        numInput = numInput.substring(0, viewInput.length() - 3);
                     } else {
-                        viewInput = viewInput.substring(0, viewInput.length() - 1);
+                        numInput = numInput.substring(0, viewInput.length() - 1);
                     }
                     input.remove(input.size() - 1);
-                    textInput.setText(viewInput);
+                    viewInput.setText(numInput);
                 }
             }
         });
@@ -330,9 +331,9 @@ public class MainActivity extends Activity {
                 input.clear();
                 output.clear();
                 operStack.clear();
-                viewInput = "";
+                numInput = "";
                 viewResults = "";
-                textInput.setText("");
+                viewInput.setText("");
                 results.setText("");
             }
         });
