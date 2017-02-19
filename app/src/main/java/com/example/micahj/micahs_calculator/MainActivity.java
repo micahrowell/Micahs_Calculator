@@ -2,11 +2,7 @@ package com.example.micahj.micahs_calculator;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.HapticFeedbackConstants;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
